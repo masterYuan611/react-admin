@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from '../../assets/imgs/logo.png'
 import { Menu, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 import './index.less'
 
 const { SubMenu } = Menu;
@@ -20,8 +21,11 @@ export default class LeftNav extends Component {
           theme="dark"
         >
           <Menu.Item key="1">
-            <Icon type="pie-chart" />
-            <span>首页</span>
+            <Link to='/home'>
+              <Icon type="pie-chart" />
+              <span>首页</span>
+            </Link>
+            
           </Menu.Item>
           <SubMenu
             key="sub1"
@@ -33,17 +37,23 @@ export default class LeftNav extends Component {
             }
           >
             <Menu.Item key="5">
-                <Icon type="mail" />
-                <span>品类管理</span>
+                <Link to='/category'>
+                  <Icon type="mail" />
+                  <span>品类管理</span>
+                </Link>
             </Menu.Item>
             <Menu.Item key="6">
-                <Icon type="mail" />
-                <span>商品管理</span>
+                <Link to='/product'>
+                  <Icon type="mail" />
+                  <span>商品管理</span>
+                </Link>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="7">
-            <Icon type="appstore" />
-            <span>用户管理</span>
+            <Link to='/user'>
+              <Icon type="appstore" />
+              <span>用户管理</span>
+            </Link>
           </Menu.Item>
         </Menu>
       </div>
