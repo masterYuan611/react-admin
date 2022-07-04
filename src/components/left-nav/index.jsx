@@ -2,11 +2,44 @@ import React, { Component } from 'react'
 import logo from '../../assets/imgs/logo.png'
 import { Menu, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import { menuList } from '../../config/menuConfig';
 import './index.less'
 
 const { SubMenu } = Menu;
 
 export default class LeftNav extends Component {
+  getMenu = (list) => {
+    return list.map(item => {
+      if (item.children) {
+        return (<SubMenu
+            key={item.key}
+            title={
+              <span>
+                <Icon type={item.icon} />
+                <span>{item.title}</span>
+              </span>
+            }
+          >
+            {item.children.map(subItem => {
+              return (<Menu.Item key={subItem.key}>
+                        <Link to={subItem.key}>
+                          <Icon type={subItem.icon} />
+                          <span>{subItem.title}</span>
+                        </Link>
+                      </Menu.Item>)
+                })}
+          </SubMenu>)
+      } else {
+        return (<Menu.Item key={item.key}>
+                  <Link to={item.key}>
+                    <Icon type={item.icon}/>
+                    <span>{item.title}</span>
+                  </Link>
+                </Menu.Item>)
+      }
+    })
+
+  }
   render() {
     return (
       <div className='left-nav'>
@@ -20,41 +53,7 @@ export default class LeftNav extends Component {
           mode="inline"
           theme="dark"
         >
-          <Menu.Item key="1">
-            <Link to='/home'>
-              <Icon type="pie-chart" />
-              <span>首页</span>
-            </Link>
-            
-          </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="mail" />
-                <span>商品</span>
-              </span>
-            }
-          >
-            <Menu.Item key="5">
-                <Link to='/category'>
-                  <Icon type="mail" />
-                  <span>品类管理</span>
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="6">
-                <Link to='/product'>
-                  <Icon type="mail" />
-                  <span>商品管理</span>
-                </Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item key="7">
-            <Link to='/user'>
-              <Icon type="appstore" />
-              <span>用户管理</span>
-            </Link>
-          </Menu.Item>
+          {this.getMenu(menuList)}
         </Menu>
       </div>
     )
