@@ -18,7 +18,7 @@ export default class Admin extends Component {
       <Sider><LeftNav/></Sider>
       <Layout>
         <PageHeader/>
-        <Content>
+        <Content className='content'>
             <Switch>
                 <Route path='/home' component={Home}/>
                 <Route path='/category' component={Category}/>
