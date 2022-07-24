@@ -1,0 +1,13 @@
+1、Component存在的问题？
+    父组件重新render()，子前组件也会重新执行render()，即使当前没有任何变化
+    当前组件setState()，重新执行render()，及时state没有任何变化
+2、解决component存在的问题
+    原因：组件的componentShouldUpdate()默认返回true，即使数据没有变化，render()也会重新执行
+    方法1：重写componentShouldUpdate()，判断如果数据有变化返回true，否则返回false
+    方法2：使用PureComponent代替Component
+    说明：一般使用PureComponent优化组件性能
+
+3、PureComponent的实现原理
+    重写实现shouldComponentUpdate()
+    对组件的新/旧state、props中的数据进行浅比较，如果没有变化，返回false，否则返回true
+    一旦shouldComponentUpdate返回false，不再重新执行render()
